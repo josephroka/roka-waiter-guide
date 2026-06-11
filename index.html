@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ROKA Mallorca — Staff Guide</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#F5F3EF;min-height:100vh;padding-bottom:80px}
+#header{background:#1A1A1A;color:#fff;padding:14px;position:sticky;top:0;z-index:100}
+#header .sub{font-size:11px;color:#AAA;letter-spacing:2px;text-transform:uppercase}
+#header h1{font-size:20px;font-weight:800;letter-spacing:-0.5px}
+#search{margin-top:10px;width:100%;padding:10px 14px;border-radius:8px;border:2px solid #555;font-size:16px;background:#333;color:#fff;outline:none;-webkit-appearance:none;appearance:none}
+#search:focus{border-color:#C8A96E}
+#search::placeholder{color:#888}
+#top-nav{display:flex;overflow-x:auto;padding:8px 10px;gap:6px;background:#fff;border-bottom:1px solid #E0DDD8;scrollbar-width:none}
+#top-nav::-webkit-scrollbar{display:none}
+#bottom-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#1A1A1A;padding:8px 10px;gap:6px;z-index:100;border-top:2px solid #333}
+.nav-btn{flex-shrink:0;padding:6px 12px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;background:#EEE;color:#444;transition:all .15s}
+.nav-btn.active{color:#fff}
+.bottom-btn{flex:1;padding:8px 6px;border-radius:10px;border:none;cursor:pointer;font-size:11px;font-weight:700;background:#333;color:#AAA;transition:all .15s;text-align:center}
+.bottom-btn.active{background:#C8A96E;color:#1A1A1A}
+#content{padding:14px}
+.section-title{font-weight:800;font-size:18px;margin-bottom:2px}
+.section-subtitle{font-size:14px;color:#888;font-style:italic;margin-bottom:14px}
+.card{background:#FAFAF8;border:1px solid #E0DDD8;border-radius:8px;margin-bottom:10px;overflow:hidden}
+.card-header{width:100%;background:none;border:none;cursor:pointer;padding:12px 14px;text-align:left;display:flex;justify-content:space-between;align-items:flex-start}
+.dish-name{font-weight:700;font-size:15px;color:#1A1A1A}
+.dish-name-es{font-size:13px;color:#666;font-style:italic;margin-top:2px}
+.temp-note{font-size:12px;color:#C0392B;font-weight:700;margin-top:3px}
+.chevron{font-size:16px;margin-left:8px;margin-top:2px;color:#888;flex-shrink:0}
+.card-body{padding:0 14px 14px;border-top:1px solid #E0DDD8;display:none}
+.card-body.open{display:block}
+.fish-note{background:#EBF5FB;border:1px solid #AED6F1;border-radius:6px;padding:8px 10px;margin:10px 0;font-size:12px;color:#1A5276}
+.label{font-size:11px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-top:10px}
+.announce{font-size:15px;color:#1A1A1A;margin-top:2px;font-weight:600}
+.announce-full{font-size:13px;color:#444;margin-top:2px;font-style:italic}
+.announce-es{font-size:13px;color:#2E86C1;font-style:italic;margin-top:1px}
+.key{font-size:13px;color:#333;margin-top:2px}
+.badges{margin-top:4px;display:flex;flex-wrap:wrap;gap:4px}
+.badge-a{display:inline-block;background:#FFF3CD;color:#7A4F00;border:1px solid #F0C040;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600}
+.badge-d{display:inline-block;background:#D4EDDA;color:#155724;border:1px solid #5CB85C;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600}
+.section-tag{font-size:11px;color:#AAA;margin-top:8px}
+#search-count{font-size:14px;color:#666;margin-bottom:12px}
+.gloss-card{background:#FAFAF8;border:1px solid #E0DDD8;border-radius:8px;margin-bottom:8px;overflow:hidden}
+.gloss-header{width:100%;background:none;border:none;cursor:pointer;padding:12px 14px;text-align:left;display:flex;justify-content:space-between;align-items:center}
+.gloss-term{font-weight:700;font-size:14px;color:#1A1A1A}
+.gloss-tag{font-size:11px;color:#888;font-style:italic;margin-left:8px}
+.gloss-body{padding:0 14px 12px;border-top:1px solid #E0DDD8;display:none;font-size:13px;color:#333;line-height:1.5}
+.gloss-body.open{display:block}
+.gloss-section-title{font-size:16px;font-weight:800;color:#1A1A1A;margin:16px 0 8px;padding-bottom:4px;border-bottom:2px solid #E0DDD8}
+.fish-card{background:#FAFAF8;border:1px solid #E0DDD8;border-radius:8px;margin-bottom:10px;overflow:hidden}
+.fish-header{width:100%;background:none;border:none;cursor:pointer;padding:12px 14px;text-align:left;display:flex;justify-content:space-between;align-items:flex-start}
+.fish-name{font-weight:700;font-size:15px;color:#1A1A1A}
+.fish-jp{font-size:12px;color:#888;font-style:italic}
+.fish-body{padding:0 14px 14px;border-top:1px solid #E0DDD8;display:none;font-size:13px;color:#333;line-height:1.6}
+.fish-body.open{display:block}
+.fish-profile{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.fish-tag{background:#EEF;border:1px solid #CCF;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;color:#336}
+.drink-card{background:#FAFAF8;border:1px solid #E0DDD8;border-radius:8px;margin-bottom:10px;overflow:hidden}
+.drink-header{width:100%;background:none;border:none;cursor:pointer;padding:12px 14px;text-align:left;display:flex;justify-content:space-between;align-items:flex-start}
+.drink-name{font-weight:700;font-size:15px;color:#1A1A1A}
+.drink-price{font-size:12px;color:#888}
+.drink-body{padding:0 14px 14px;border-top:1px solid #E0DDD8;display:none}
+.drink-body.open{display:block}
+.drink-section-title{font-size:16px;font-weight:800;color:#1A1A1A;margin:16px 0 8px;padding-bottom:4px;border-bottom:2px solid #C8A96E}
+.flavor-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.ftag{display:inline-block;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:700}
+.ftag.sweet{background:#FDE8F0;color:#8B0045}
+.ftag.sour{background:#FFF9C4;color:#7A6000}
+.ftag.bitter{background:#E8F5E9;color:#1B5E20}
+.ftag.floral{background:#F3E5F5;color:#4A148C}
+.ftag.citrus{background:#FFF3E0;color:#E65100}
+.ftag.umami{background:#E8EAF6;color:#1A237E}
+.ftag.smoky{background:#EFEBE9;color:#3E2723}
+.ftag.spicy{background:#FFEBEE;color:#B71C1C}
+.ftag.fresh{background:#E0F2F1;color:#004D40}
+.ftag.rich{background:#FBE9E7;color:#BF360C}
+.ftag.dry{background:#ECEFF1;color:#37474F}
+.wine-bar{margin:4px 0 2px}
+.wine-bar-label{font-size:11px;color:#888;display:inline-block;width:70px}
+.wine-bar-track{display:inline-block;letter-spacing:1px;font-size:13px}
+.pairing{margin-top:8px;background:#FFF8EC;border-left:3px solid #C8A96E;padding:6px 10px;font-size:12px;color:#5A3E00;border-radius:0 4px 4px 0}
+.cocktail-ingredients{font-size:12px;color:#666;margin-top:4px;font-style:italic}
+</style>
+</head>
+<body>
+<div id="header">
+  <div class="sub">ROKA MALLORCA 2026</div>
+  <h1>Staff Guide</h1>
+  <input id="search" type="text" placeholder="🔍 Search dish, allergen, ingredient..." oninput="doSearch(this.value)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+</div>
+<div id="top-nav"></div>
+<div id="content"></div>
+<div id="bottom-nav">
+  <button class="bottom-btn" onclick="switchTab('food')">🍱 Food</button>
+  <button class="bottom-btn" onclick="switchTab('fish')">🐟 Fish</button>
+  <button class="bottom-btn" onclick="switchTab('glossary')">📖 Glossary</button>
+  <button class="bottom-btn" onclick="switchTab('drinks')">🍶 Drinks</button>
+  <button class="bottom-btn" onclick="switchTab('allergy')">⚠️ Allergy</button>
+</div>
+
+<script>
+// ============================================================
+// FOOD DATA
+// ============================================================
+const sections=[
+{id:"starters",label:"Starters & Salads",labelEs:"Entrantes y Ensaladas",color:"#2D6A4F",dishes:[
+{name:"Edamame",nameEs:"Habas de Soja",announce:"Steamed edamame with sea salt",announceFull:"Steamed edamame with Maldon sea salt",announceEs:"Habas de soja con sal marina",key:"Edamame (soya beans), Maldon sea salt",allergens:"Soya",diet:"Vegan & GF",section:"Main Kitchen"},
+{name:"Spicy Edamame",nameEs:"Habas Picantes",announce:"Spicy edamame",announceFull:"Spicy edamame with chili, garlic and sesame",announceEs:"Habas de soja picante",key:"Edamame, chili, garlic, sesame oil, rice vinegar, water. Garnish: white sesame seeds",allergens:"Sesame, Soya, Garlic, Chili",diet:"Vegan & GF",section:"Main Kitchen"},
+{name:"Tuna Tataki",nameEs:"Tataki de Atún",announce:"Tuna tataki with apple mustard dressing",announceFull:"Seared tuna tataki with apple mustard dressing, shredded daikon and spring onion",announceEs:"Tataki de atún con aderezo de mostaza y manzana",key:"Seared tuna. Apple mustard dressing: green apple, white onion, mustard seeds, soy, sake, ginger, sesame, barley miso, vinegar, shichimi, dashi, garlic. Garnish: shredded daikon, spring onion, white sesame",allergens:"Fish, Soya, Gluten, Onion, Sesame, Garlic, Mustard, Alcohol",diet:null,section:"Main Kitchen / Tasting Menu"},
+{name:"Kampachi Salad",nameEs:"Sashimi de Pez Limón",announce:"Yellowtail sashimi salad with yuzu truffle dressing",announceFull:"Yellowtail sashimi salad with yuzu truffle dressing, mizuna and pickled sweet potato",announceEs:"Sashimi de pez limón con aderezo de yuzu y trufa",key:"Yellowtail/Kampachi, yuzu truffle dressing (dai dai ponzu, mirin, GF soy, orange, vinegar, yuzu juice, olive oil, truffle oil, garlic). Garnish: mizuna, pickled sweet potato",allergens:"Fish, Soya, Garlic, Mushroom, Mustard, Alcohol",diet:"Gluten Free",section:"Main Kitchen",fishNote:"🐟 Kampachi / Yellowtail = Pez limón. Lighter than hamachi, lean and mild, best in early summer. Served raw."},
+{name:"Iceberg Salad",nameEs:"Ensalada de Lechuga",announce:"Iceberg salad with wafu dressing",announceFull:"Iceberg salad with wafu dressing, nori and sesame seeds",announceEs:"Ensalada de lechuga con aderezo de cebolla caramelizada",key:"Iceberg lettuce, wafu dressing (white onion, celery, carrot, green apple, GF soy, vinegar, sugar, grapeseed oil, sesame oil). Garnish: nori, white sesame, spring onion",allergens:"Soya, Sesame, Onion, Celery, Alcohol",diet:"Vegan",section:"Main Kitchen"},
+{name:"Spinach Salad",nameEs:"Ensalada de Espinacas",announce:"Baby spinach salad with sesame dressing",announceFull:"Baby spinach salad with sesame dressing, daikon and pickled carrot",announceEs:"Ensalada de espinaca con salsa de sésamo",key:"Raw baby spinach, sesame dressing (goma paste, sesame oil, mirin, sugar, ginger juice, rice vinegar, GF soy). Garnish: daikon, pickled carrot, pickled ginger, black & white sesame",allergens:"Soya, Sesame",diet:"GF & Vegan",section:"Main Kitchen"}
+]},
+{id:"kitchen",label:"Main Kitchen",labelEs:"Cocina Principal",color:"#B5451B",dishes:[
+{name:"Prawn Tempura",nameEs:"Gambas Tempura",announce:"Panko prawns with chili mayo",announceFull:"Panko crusted black tiger prawns with chili mayo",announceEs:"Gambas en panko con mayonesa de chili",key:"Black tiger prawn, panko, katakuriko, egg, chili mayo (egg yolk, sweet chili sauce, chili garlic sauce, rice vinegar, lemon juice, sunflower oil). Garnish: lime wage, sea salt — 6 pieces",allergens:"Crustaceans, Egg, Gluten, Soya, Garlic, Mustard, Chili",diet:null,section:"Main Kitchen"},
+{name:"Squid Tempura",nameEs:"Calamares Tempura",announce:"Fried squid with green chili mayo",announceFull:"Fried squid with green yuzu kosho chili mayo",announceEs:"Calamares fritos con mayonesa de chili verde",key:"Squid tube, plain flour, tempura seasoning (sesame seeds, yukari, ao nori, Korean chili flakes, Maldon salt). Green yuzu kosho mayo: yuzu zest, vinegar, mirin, soy, ginger juice, shichimi, olive oil, garlic, spring onion, green chili, shiso leaves, saikyo miso, egg yolk, corn oil, lime. Garnish: lime wage, shichimi",allergens:"Molluscs, Egg, Gluten, Chili, Garlic, Sesame, Soya, Onion",diet:null,section:"Main Kitchen"},
+{name:"Seafood Gyoza",nameEs:"Gyoza de Marisco",announce:"Crab, black cod and prawn dumpling with roasted chili dressing",announceFull:"Crab, black cod and prawn dumpling with roasted chili dressing and ponzu",announceEs:"Dumpling de cangrejo, bacalao y gamba con aderezo de chili",key:"Crab, prawn, black cod mousse, tofu soft, wakame, kewpie mayo, lime juice. Dressing: ponzu, roasted chili salsa (red & green chili, ginger, garlic). Dough: wheat flour. Garnish: edamame, spring onion, nori",allergens:"Fish, Crustaceans, Egg, Soya, Gluten, Sesame, Garlic, Onion, Chili",diet:null,section:"Main Kitchen / Tasting Menu"},
+{name:"Warm Eggplant",nameEs:"Berenjena Templada",announce:"Warm eggplant salad with sesame miso and bonito flakes",announceFull:"Warm eggplant salad with sesame miso, bonito flakes and spring onion",announceEs:"Ensalada tibia de berenjena con miso de sésamo y bonito",key:"Eggplant, katakuriko, sesame miso (goma paste, den miso, ginger juice, GF soy, vinegar, sugar, sesame oil, mirin, lemon juice). Garnish: katsuobushi (bonito flakes), coriander, spring onions, lemon wage",allergens:"Fish, Soya, Sesame, Onion, Alcohol",diet:"GF — NOT suitable for celiac. CAN be done Vegetarian",section:"Main Kitchen"},
+{name:"Baby Chicken",nameEs:"Pollo Picantón",announce:"Baby chicken with chili lemon garlic",announceFull:"Baby chicken with chili lemon garlic, miso butter and lemon zest",announceEs:"Pollo picantón con chili, limón y ajo",key:"Baby chicken, sauce (shiro miso + chili flakes + spring onion + garlic + ginger + gluten soy + sugar + grapeseed oil), miso butter (butter + shiro miso + saikyo miso + gluten soy). Garnish: lemon zest, chives, lemon wage. Breast = pechuga / Thigh = muslo",allergens:"Dairy, Soya, Gluten, Garlic, Onion, Chili",diet:null,section:"Main Kitchen"}
+]},
+{id:"sushi",label:"Sushi & Maki",labelEs:"Sushi y Maki",color:"#1B4F72",dishes:[
+{name:"Avocado Maki",nameEs:"Maki de Aguacate",announce:"Avocado and cucumber maki",announceFull:"Avocado and cucumber maki with yuzu mayo and wasabi pea seasoning",announceEs:"Maki de aguacate y pepino",key:"Avocado, cucumber, nori, sushi rice, yuzu mayo (egg yolk, rice vinegar, lemon juice, sunflower oil, yuzu juice, yuzu zest, salt). Garnish: wasabi pea seasoning, tenkatsu, black & white sesame, gari, wasabi",allergens:"Egg, Sesame, Chili, Gluten, Msg",diet:"Vegetarian, can be Vegan",section:"Sushi – Maki"},
+{name:"Salmon Maki",nameEs:"Maki de Salmón",announce:"Salmon and avocado maki with yuzu mayo",announceFull:"Salmon and avocado maki with yuzu mayonnaise, asparagus and wasabi tobiko",announceEs:"Maki de salmón y aguacate con mayonesa de yuzu",key:"Raw salmon, sushi rice, asparagus, avocado, yuzu mayo, wasabi tobiko, tenkatsu, lemon zest, yuzu zest. Garnish: pickled ginger and wasabi on the side",allergens:"Fish, Egg, Gluten, Mustard, Msg",diet:null,section:"Sushi – Maki"},
+{name:"Soft Shell Crab Maki",nameEs:"Maki de Cangrejo Blando",announce:"Soft shell crab maki with chili mayo",announceFull:"Soft shell crab maki roll with chili mayo, kimchi and cucumber",announceEs:"Maki de cangrejo de caparazón blando con mayonesa de chili",key:"Soft shell crab, sushi rice, nori, cucumber, tempura batter, chives, kimchi, chili mayo (egg yolk, Gochujang paste, rice vinegar, lemon juice, corn oil). Garnish: chili mayo, gari, wasabi",allergens:"Crustaceans, Fish, Egg, Gluten, Garlic, Onion, Chili, Msg",diet:null,section:"Sushi – Maki"},
+{name:"Crispy Prawn Maki",nameEs:"Maki de Gamba Crujiente",announce:"Crispy prawn maki with avocado and wasabi mayo",announceFull:"Crispy prawn maki with avocado, daikon cress and wasabi mayo",announceEs:"Maki de gamba crujiente y aguacate con mayonesa de wasabi",key:"Crispy prawn (prawn + katakuriko + egg + panko + oil), sushi rice, nori, avocado, daikon cress, sweet soy (soy sweet ABC + lemon juice + soy shibanuma), wasabi mayo (egg yolk + wasabi paste + lemon juice + rice vinegar + sunflower oil + salt). Garnish: black & white sesame, wasabi mayo, gari, wasabi",allergens:"Crustaceans, Egg, Gluten, Soya, Sesame, Mustard, Alcohol",diet:null,section:"Sushi – Maki"},
+{name:"California Maki",nameEs:"Maki California",announce:"Crab and avocado maki with wasabi tobiko",announceFull:"Crab and avocado maki with wasabi tobiko and yuzu mayo",announceEs:"Maki de cangrejo y aguacate con wasabi tobiko",key:"Crab meat, sushi rice, nori, avocado, cucumber, wasabi tobiko, tenkatsu, yuzu mayo (egg yolk + rice vinegar + lemon juice + yuzu juice + yuzu zest + salt + sunflower oil). Garnish: wasabi tobiko on top, tenkatsu on side, gari, wasabi",allergens:"Crustaceans, Fish, Egg, Gluten, Msg, Mustard, Soya",diet:null,section:"Sushi – Maki"},
+{name:"Spicy Tuna Maki",nameEs:"Maki de Atún Picante",announce:"Spicy tuna maki",announceFull:"Spicy bluefin tuna maki with piri piri sauce and tenkatsu",announceEs:"Maki de atún picante",key:"Bluefin tuna, sushi rice, nori, cucumber, carrot, piri piri sauce (fresh red chili + onion + garlic + chili oil + sesame oil + paprika + miso + soy + grapeseed oil + salt + sugar), tenkatsu, chives",allergens:"Fish, Gluten, Sesame, Chili, Garlic, Soya, Egg, Onion, Msg",diet:null,section:"Sushi – Maki"},
+{name:"Chirashi Maki",nameEs:"Maki Chirashi",announce:"Mixed sashimi maki rolls with spicy miso",announceFull:"Mixed sashimi maki roll with salmon, tuna, white fish, avocado and spicy miso",announceEs:"Maki de mezcla de pescado con miso picante",key:"Salmon, tuna, white fish, cucumber, avocado, spring onion, shiso leaf. Spicy miso: yuzu kosho green + saikyo + lime + Korean chili + sunflower oil. Garnish: spring onion, gari, wasabi",allergens:"Fish, Onion, Chili",diet:"GLUTEN FREE",section:"Sushi – Maki / Tasting Menu"},
+{name:"Prawn Tempura Maki",nameEs:"Maki de Gamba Tempura",announce:"Crispy prawn tempura maki with chili mayo",announceFull:"Crispy black tiger prawn tempura maki with chili mayo",announceEs:"Maki de gamba tempura con mayonesa de chili",key:"Black tiger prawn, panko, katakuriko, sushi rice, nori, chili mayo. Chili mayo: egg yolk, sweet chili sauce, chili garlic sauce, rice vinegar, lemon juice, sunflower oil, sea salt",allergens:"Crustaceans, Egg, Gluten, Soya, Garlic, Mustard, Chili",diet:null,section:"Sushi – Maki"},
+{name:"Wagyu Gunkan",nameEs:"Gunkan de Wagyu",announce:"Wagyu gunkan with oscietra caviar",announceFull:"Wagyu gunkan with oscietra caviar and wasabi ponzu — 4 pieces",announceEs:"Gunkan de wagyu con caviar de oscietra",key:"Wagyu, wasabi ponzu dressing (wasabi paste + white soy + dai dai ponzu), sushi rice, nori, shallots, maldon salt, black pepper, grapeseed oil. Garnish: oscietra caviar, fresh ginger, spring onions. ⚠️ Chef recommends: enjoy WITHOUT soy sauce",allergens:"Fish, Soya, Gluten, Onion, Mustard, Alcohol",diet:null,section:"Sushi – Tasting Menu"},
+{name:"Tuna Tartare",nameEs:"Tartare de Atún",announce:"Tuna tartare with oscietra caviar and nori rice crackers",announceFull:"Bluefin tuna tartare with oscietra caviar, wasabi ponzu and nori rice crackers",announceEs:"Tartare de atún con caviar de oscietra y crackers de arroz y alga",key:"Bluefin tuna, egg yolk, wasabi ponzu (wasabi paste + dai-dai ponzu + white soy), grapeseed oil, shallot, black pepper. Garnish: 6g oscietra caviar, spring onion, rice crackers (rice sheets + nori sheets + oil + shichimi + salt)",allergens:"Fish, Egg, Soya, Gluten, Sesame, Onion, Chili, Mustard",diet:null,section:"Sushi / Tartare"},
+{name:"Hamachi no Taru Taru",nameEs:"Tartare de Pez Limón",announce:"Yellowtail tartare with ginger pearls and nori rice crackers",announceFull:"Yellowtail tartare with ginger pearls, Korean chili flakes and nori rice crackers",announceEs:"Tartare de pez limón con perlas de jengibre y crackers de arroz y alga",key:"Yellowtail, lemon chili dressing (garlic + grapeseed oil + mirin + lemon juice + GF soy + chili garlic sauce), celery, black pepper, lemon juice. Garnish: ginger pearl, Korean chili flakes, spring onion, rice crackers",allergens:"Fish, Soya, Sesame, Garlic, Onion, Chili, Celery",diet:null,section:"Sushi / Tartare"}
+]},
+{id:"robata-seafood",label:"Robata Seafood",labelEs:"Robata Mariscos",color:"#1A6B8A",dishes:[
+{name:"Salmon Teriyaki",nameEs:"Salmón Teriyaki",announce:"Salmon teriyaki",announceFull:"Salmon teriyaki with sancho salt and lemon",announceEs:"Salmón teriyaki",key:"Salmon, teriyaki sauce (salmon bones + soy + sake + mirin + castor sugar + dry chili). Sancho salt: Maldon sea salt + sancho pepper. Garnish: sancho salt, lemon wage, extra teriyaki sauce",allergens:"Fish, Soya, Gluten, Chili, Alcohol",diet:null,section:"Robata Seafood"},
+{name:"Seabream Tai Miso",nameEs:"Dorada con Miso",announce:"Sea bream fillet with pickled red onions",announceFull:"Sea bream fillet marinated in ryotei miso with pickled red onions",announceEs:"Filete de dorada con cebolla roja encurtida",key:"Sea bream, ryotei miso (saikyo miso + soy + sake + mirin + sugar + olive oil). Pickled red onion: red onion + rice vinegar + green chili + sugar. Garnish: pickled red onions, lemon wage, tahoon cress",allergens:"Fish, Soya, Onion, Chili, Alcohol",diet:"GF",section:"Robata Seafood"},
+{name:"Black Cod / Gindara",nameEs:"Bacalao Negro / Gindara",announce:"Black cod with yuzu miso",announceFull:"Black cod with yuzu miso, pickled radish and hoba leaf",announceEs:"Bacalao negro con miso de yuzu",key:"Black cod (gindara — NOT real cod, it's sablefish: extremely buttery, high fat, melts in mouth). Yuzu miso: saikyo miso + yuzu juice + soy + sake + mirin + sugar + ginger juice + chili oil + green yuzu kosho + frozen yuzu zest. Garnish: pickled radish, yuzu miso, black sesame, hoba leaf",allergens:"Fish, Soya, Chili, Sesame, Alcohol",diet:"GF",section:"Robata Seafood / Tasting Menu",fishNote:"🐟 Black Cod / Gindara = Bacalao negro. NOT actual cod — it's sablefish. Extremely buttery and rich, one of the finest fish on the menu. Melts in the mouth."},
+{name:"Octopus Skewers",nameEs:"Pulpo a la Parrilla",announce:"Grilled octopus skewers with aioli",announceFull:"Grilled octopus skewers with garlic aioli and Korean chili flakes",announceEs:"Pulpo a la parrilla con aioli",key:"Octopus, garlic aioli (garlic + GF soy + egg yolk + vinegar + grapeseed oil + red yuzu kosho). Garnish: Korean chili flakes, lime, bubu arare, lime wage",allergens:"Molluscs, Egg, Soya, Chili, Sesame, Garlic, Gluten",diet:null,section:"Robata Seafood"}
+]},
+{id:"robata-meat",label:"Robata Meat",labelEs:"Robata Carnes",color:"#7B2D00",dishes:[
+{name:"Beef Skewers",nameEs:"Pincho de Ternera",announce:"Beef skewers with padron pepper",announceFull:"Beef tenderloin skewers with padron pepper and red yuzu kosho sauce",announceEs:"Pincho de ternera con pimientos de padrón",key:"Beef tenderloin, padron pepper, red yuzu kosho sauce (red yuzu kosho + soy + sugar + olive oil). Garnish: white sesame seeds",allergens:"Soya, Gluten, Sesame, Chili",diet:null,section:"Robata Meat"},
+{name:"Beef Fillet",nameEs:"Solomillo de Ternera",announce:"Spicy beef fillet with chili ginger sauce",announceFull:"Spicy beef tenderloin fillet with chili ginger sauce — always mention temperature",announceEs:"Solomillo de ternera con salsa de chili y jengibre",key:"Beef tenderloin, spicy sauce (aka/red miso + red & green chili + garlic + ginger + tamari soy + mirin + lime zest + white sesame). Garnish: spring onion, kiku flower, benitate. ALWAYS MENTION TEMPERATURE",allergens:"Soya, Gluten, Sesame, Garlic, Onion, Chili, Alcohol",diet:null,section:"Robata Meat",tempNote:"⚠️ Always ask temperature / Siempre preguntar el punto"},
+{name:"Japanese Wagyu",nameEs:"Wagyu Japonesa",announce:"Japanese wagyu beef with pickled mushrooms and wasabi ponzu",announceFull:"A5 Japanese wagyu striploin with pickled eryngii mushrooms and wasabi ponzu — always mention temperature",announceEs:"Wagyu japonesa con setas encurtidas y salsa ponzu y wasabi",key:"A5 Japanese wagyu striploin 100g, eryngii mushroom. Wasabi ponzu: wasabi paste + dai-dai ponzu + white soy. Garnish: fresh wasabi, chives, pickled mushroom. ALWAYS MENTION TEMPERATURE. Medium = al punto / Medium-rare = poco hecho",allergens:"Soya, Dairy, Gluten, Onion, Mushroom, Mustard",diet:null,section:"Robata Meat / Tasting Menu",tempNote:"⚠️ Always ask temperature. Medium = al punto / Medium-rare = poco hecho"},
+{name:"Lamb Cutlets",nameEs:"Chuletas de Cordero",announce:"Korean spiced lamb cutlets with cucumber and sesame dressing",announceFull:"Korean spiced lamb cutlets with cucumber and sesame dressing — served with fork and knife to share",announceEs:"Chuletas de cordero con especias coreanas y pepino con sésamo",key:"Lamb chop, Korean spiced sauce (gochujang + chili sauce + ginger + garlic + chili + soy + mirin + sake + sesame oil), sesame dressing (goma paste + sesame oil + mirin + sugar + ginger juice + vinegar + soy), cucumber. Served with fork & knife to share",allergens:"Soy, Gluten, Garlic, Sesame, Chili",diet:null,section:"Robata Meat / Tasting Menu"},
+{name:"Baby Back Ribs",nameEs:"Costillar Ibérico",announce:"Baby back ribs with cashew nuts",announceFull:"Baby back ribs with cashew nuts and soy glaze — served with oshibori",announceEs:"Costillar ibérico con anacardos",key:"Back ribs, cashew nuts, spring onions. Master stock: mirin + light soy + ginger + garlic + dried chili + lemon + orange + cinnamon + star anise + cloves + Korean chili paste. Soy glaze: mixed sesame seeds + hoisin + mirin + chili oil + sweet chili + soy. Garnish: cashew nuts with sancho pepper, spring onions. Served with oshibori (hot towel)",allergens:"Sesame, Garlic, Gluten, Soya, Alcohol, Nuts, Onion, Chili",diet:null,section:"Robata Meat"},
+{name:"Chicken Wings",nameEs:"Alitas de Pollo",announce:"Chicken wings with yuzu kosho honey",announceFull:"Chicken wings with yuzu kosho honey and sancho salt",announceEs:"Alitas de pollo con yuzu kosho y miel",key:"Chicken wings (middle part), yuzu kosho honey (green yuzu kosho + yuzu juice + Korean chili powder + sake + mirin), sancho salt. Garnish: lime wedge, Korean chili powder, chives",allergens:"Chili, Onion, Alcohol",diet:null,section:"Robata Meat"}
+]},
+{id:"robata-veg",label:"Robata Veg",labelEs:"Robata Verduras",color:"#4A7C59",dishes:[
+{name:"Padron Peppers",nameEs:"Pimientos de Padrón",announce:"Grilled padron peppers with yuzu salt",announceFull:"Grilled padron peppers with yuzu salt",announceEs:"Pimientos de padrón a la parrilla con sal de yuzu",key:"Padron peppers, yuzu salt",allergens:"None",diet:"Vegan & GF",section:"Robata Vegetable"},
+{name:"Broccoli no Wafu",nameEs:"Brócoli con Salsa Wafu",announce:"Tenderstem broccoli with wafu truffle sauce",announceFull:"Tenderstem broccoli with wafu truffle sauce and white sesame",announceEs:"Bimi brócoli y salsa de wafu con trufa",key:"Tenderstem broccoli, wafu truffle dressing (white onion + celery + carrot + green apple + GF soy + vinegar + sugar + grapeseed oil + sesame oil + white truffle oil + sweet soy + sunflower oil + pickled ginger). Garnish: white sesame seeds",allergens:"Soya, Gluten, Garlic, Onion, Celery, Mushroom (truffle)",diet:"Vegan",section:"Robata Vegetable"},
+{name:"Sweet Potato",nameEs:"Boniato",announce:"Grilled sweet potato with yuzu cream",announceFull:"Grilled sweet potato with yuzu cream and Korean chili flakes — served with wooden spoon",announceEs:"Boniato a la parrilla con crema de yuzu",key:"Sweet potato, yuzu cream (sour cream + cream + butter + yuzu juice + green yuzu kosho + ao nori + shichimi + dried yuzu zest + salt). Garnish: chives, Korean chili flakes. Served with small wooden spoon",allergens:"Dairy, Sesame, Onion, Chili",diet:"Vegetarian, GF — cannot be done Vegan",section:"Robata Vegetable"},
+{name:"Oyster Mushrooms",nameEs:"Setas Girgola",announce:"Oyster mushrooms with truffle ponzu butter",announceFull:"Oyster mushrooms with truffle ponzu butter, garlic and chives",announceEs:"Girgolas con mantequilla de ponzu y trufa",key:"Oyster mushrooms, garlic, soy, sweet soy, butter, yuzu. Garnish: chives and garlic",allergens:"Dairy, Soy, Garlic, Onion",diet:null,section:"Robata Vegetable"},
+{name:"Grilled Eggplant",nameEs:"Berenjena a la Parrilla",announce:"Grilled eggplant with ginger and shichimi",announceFull:"Grilled eggplant with ginger, shichimi and GF soy sauce",announceEs:"Berenjena a la parrilla con jengibre y shichimi",key:"Eggplant, ginger, shichimi. Sauce: GF soy, grated ginger, sake, mirin. Garnish: shichimi pepper",allergens:"Dairy, Soy, Garlic, Onion",diet:null,section:"Robata Vegetable"}
+]},
+{id:"desserts",label:"Desserts",labelEs:"Postres",color:"#6B3FA0",dishes:[
+{name:"Guava Cheesecake",nameEs:"Tarta de Queso de Guayaba",announce:"Guava cheesecake with mango biscuit and sesame crumble",announceFull:"Baked guava cheesecake with black sesame crumble, mango biscuit, strawberry and torched papaya",announceEs:"Tarta de queso de guayaba con crumble de sésamo negro y galeta de mango",key:"Philadelphia cream cheese, egg yolk, egg white, sugar, flour, salt. Black sesame crumble: black sesame + flour + butter + sugar. Guava sauce: guava puree + sugar. Garnish: fresh strawberry, torched papaya and mango",allergens:"Dairy, Egg, Gluten, Sesame",diet:null,section:"Pastry"},
+{name:"Coconut Parfait",nameEs:"Parfait de Coco",announce:"Smoked coconut tamago with passion fruit, lychee and raspberries",announceFull:"Smoked coconut tamago with passion fruit sauce, lychee, raspberries, mochi and fried nori",announceEs:"Parfait de coco con fruta de la pasión, frambuesa y lychee",key:"Coconut parfait (egg white + sugar + cream + smoked coco lopez + vanilla + gelatine), charcoal coconut (desiccated coconut + charcoal powder), passion fruit sauce, mochi (glutinous rice flour + sugar + water), fried nori (nori + mirin + sugar). Garnish: raspberry, passion fruit, mochi, lychee, fried nori",allergens:"Dairy, Egg",diet:"GF & Nuts free",section:"Pastry"},
+{name:"Chocolate Pudding",nameEs:"Pudding de Chocolate",announce:"Chocolate and green tea pudding with pear ice cream",announceFull:"Dark chocolate and green tea pudding with crunchy jivara, pear ice cream and cocoa wafer",announceEs:"Pudding de chocolate y té verde con helado de pera",key:"Dark chocolate pudding (dark chocolate + butter + almond powder + rice flour + eggs + sugar), green tea centre (milk + cream + green tea powder + white chocolate), crunchy jivara (milk chocolate + GF flour + rice flour + katakuriko + eggs + cream + sugar), pear ice cream (pear puree + milk + cream + sugar + milk powder + stabilizer + yuzu juice), cocoa wafer. Garnish: diced nashi pear, cocoa wafer",allergens:"Dairy, Egg, Nuts",diet:"GF",section:"Pastry"},
+{name:"Miso Crème Brûlée",nameEs:"Crème Brûlée de Miso",announce:"Miso crème brûlée with caramelized figs and pistachio ice cream",announceFull:"Miso crème brûlée with caramelized figs, honey, lemon oil and pistachio ice cream",announceEs:"Crème brûlée de miso con higos y helado de pistacho",key:"Miso crème brûlée (whipping cream + milk + egg yolk + sugar + shiro miso), fig, sugar, honey, lemon oil. Pistachio ice cream (milk + cream + sugar + pistachio paste). Caramelized pistachio and dust (pistachio + sugar)",allergens:"Milk, Egg, Soya, Nuts",diet:null,section:"Pastry"},
+{name:"Fruit Platter",nameEs:"Selección de Frutas",announce:"Selection of exotic fruit",announceFull:"Selection of exotic seasonal fruit",announceEs:"Selección de frutas exóticas",key:"Selection of exotic seasonal fruit",allergens:"None",diet:"Vegan & GF",section:"Pastry"}
+]}
+];
+
+// ============================================================
+// GLOSSARY DATA
+// ============================================================
+const glossaryData = [
+{section:"Japanese Terms — Service"},
+{term:"HAI",tag:"Response to chef",def:"Yes — used when responding to the chef. Example: 'Table 4 for 2, HAI chef!'"},
+{term:"OUSS",tag:"Response to colleagues",def:"Yes — used when responding to colleagues or in briefing. Example: 'Section 1, OUSS!'"},
+{term:"ONEGAISHIMASU",tag:"Kitchen call",def:"'Please have it' — when the chef calls Onegaishimasu it means 'Service please'"},
+{term:"TORIMAS",tag:"Moving through",def:"Used to make colleagues aware you are coming through — equivalent of 'Back!'"},
+{term:"ARIGATO",tag:"Thank you",def:"Thank you — used in place of 'thank you' in any situation"},
+{term:"DOU ITASHIMASHITE",tag:"You're welcome",def:"You're welcome — used in place of 'you are welcome'"},
+{term:"OHAYO GOZAIMASU",tag:"Morning briefing",def:"Good morning — used to initiate the morning briefing"},
+{term:"KONBAWA-MINASAN",tag:"Evening briefing",def:"Good evening everyone — used to initiate the evening briefing"},
+{term:"IRASSHAIMESE",tag:"Welcoming guests",def:"Welcome — used when welcoming guests into the restaurant"},
+{term:"KANPAI",tag:"Dropping beverages",def:"Cheers — used specifically when dropping beverages, especially sake, to the table"},
+{section:"Miso Types"},
+{term:"Saikyo / Shiro (White Miso)",tag:"Miso",def:"The youngest miso. Fermented for only 3 months. Golden colour, sweet, delicate and buttery. Very subtle flavour. Used in: black cod, seabream, baby chicken, sweet potato."},
+{term:"Shiro (White Miso)",tag:"Miso",def:"Milder than other misos. Fermented 6 months, made from rice and soybeans. Slight sweetness. Used in: baby chicken sauce, miso butter, chirashi spicy miso."},
+{term:"Aka (Red Miso)",tag:"Miso",def:"Dark, reddish, saltier and more assertive. Fermented at least 12 months. Used in soups, dark sauces and marinades. Used in: beef fillet spicy sauce."},
+{term:"Mugi (Barley Miso)",tag:"Miso",def:"Nutty texture, barley does not fully break down during fermentation. Used in: tuna tataki apple mustard dressing."},
+{section:"Key Sauces & Ingredients"},
+{term:"Ponzu",tag:"Sauce",def:"A citrus-based soy sauce used extensively in Japanese cooking — sauces, marinades and dressings. Contains tamari, soy sauce, mirin, sake, rice vinegar, bonito flakes and dashi. Our Ponzu is NOT vegetarian. Veg Ponzu is used for vegetable dishes."},
+{term:"Wafu",tag:"Sauce / Dressing",def:"Literally means Japanese dressing. Contains soy, rice vinegar, sesame oil, grapeseed oil, green apple, onion, celery, carrots, salt and sugar. Light and refreshing — used in salads and with vegetables."},
+{term:"Yuzu Kosho",tag:"Seasoning",def:"A Japanese seasoning paste made from chili, yuzu peel, garlic and oil. Has a sharp kick from the citrus and the green chili. Comes in green (milder) and red (more intense) versions."},
+{term:"Mirin",tag:"Ingredient",def:"A common staple in Japanese cooking — similar to sake but much sweeter and milder. An essential ingredient in sushi rice and many sauces. Cooking alcohol."},
+{term:"Rice Vinegar",tag:"Ingredient",def:"Much sweeter and milder than western vinegar. Major ingredient in Japanese cuisine — used in sushi rice, dressings, marinades."},
+{term:"Tamari",tag:"Ingredient",def:"Darker than regular soy sauce, milder and more aromatic, little or no wheat. Used in many sauces at ROKA."},
+{term:"Dashi",tag:"Stock",def:"A Japanese cooking stock — base for miso soups and sauces. Made with kombu (seaweed), bonito flakes, salt and water."},
+{term:"Teriyaki",tag:"Sauce / Cooking",def:"A dish marinated in sauce then grilled. Our teriyaki sauce contains sake, mirin, soy, mirepoix (onion, celery, carrot, daikon), kombu, ginger, garlic and sugar. Thick and sweet."},
+{term:"Kochujang / Gochujang",tag:"Korean sauce",def:"Spicy Korean sauce made from red chili, glutinous rice, fermented soy beans, salt and sugar. Used in soft shell crab maki chili mayo and lamb cutlets."},
+{section:"Cooking Terms"},
+{term:"Tataki (Seared)",tag:"Cooking term",def:"Preparing fish or meat by searing it very briefly — leaving the inner part practically raw — and cutting into thin slices. Used for: Tuna Tataki."},
+{term:"Aburi (Torched)",tag:"Cooking term",def:"Preparing fish or meat by torching it very briefly, leaving the inner part raw. Mostly applies to nigiri."},
+{term:"Tempura",tag:"Cooking term",def:"Battered fish or vegetables deep fried in oil. Light, crispy batter. Served with tentsuyu (dipping sauce of dashi, mirin and soy) with grated daikon."},
+{term:"Age / Agemono",tag:"Cooking term",def:"Deep fried food items — such as soft shell crab, baby squid, etc."},
+{term:"Tatami / Usuzukuri",tag:"Cutting style",def:"Thinly sliced — refers to cutting fish in very thin slices. Used for sashimi."},
+{section:"Seaweed (Seaweed types)"},
+{term:"Nori",tag:"Seaweed",def:"Dried seaweed in very thin sheets. Mainly used to make sushi rolls (maki). Consistency similar to rice paper. Mostly used as seasoning and garnish."},
+{term:"Kombu",tag:"Seaweed",def:"A variety of kelp, dried, used to make dashi (the standard Japanese soup stock). Together with bonito flakes it creates umami flavour. Also used in sushi rice."},
+{term:"Wakame",tag:"Seaweed",def:"Versatile seaweed that can be eaten in hot soups or cold in salads. Dark green colour. Used in daily Japanese cooking."},
+{term:"Ao Nori",tag:"Seaweed",def:"Species of algae which grows on rocks by the ocean. Used as seasoning and garnish — you'll find it in the squid tempura seasoning and sweet potato yuzu cream."},
+{section:"Herbs & Garnishes"},
+{term:"Green Shiso",tag:"Herb",def:"From the mint family — hints of basil and spearmint. Used as garnish, in sashimi, sushi, maki. Can be fried for tempura. Also used in our cocktails."},
+{term:"Mizuna",tag:"Herb",def:"Known as Japanese rocket. A green leaf from Kyoto, harvested in winter. Used in the Kampachi salad."},
+{term:"Gari (Pickled Ginger)",tag:"Garnish",def:"Thinly sliced ginger marinated in sweetened rice vinegar. Served as condiment to refresh the palate between types of sushi."},
+{term:"Wasabi",tag:"Condiment",def:"Japanese horseradish. Produces vapours that stimulate the nose rather than the tongue. Fresh wasabi grated at the table loses flavour in less than 15 minutes. We grate fresh wasabi at the table. Powdered wasabi contains no wasabi — made from horseradish and green food colouring."},
+{term:"Bonito / Katsuobushi",tag:"Ingredient",def:"Member of the mackerel/tuna family. Used fresh or as dried flakes (katsuobushi). Essential ingredient in dashi. Used as garnish on warm eggplant."},
+{term:"Shichimi",tag:"Spice",def:"Japanese 7-spice seasoning (togarashi). Dried mixture of red chili flakes, sansho, goma seeds, nori, shiso, dried orange peel, poppy seeds."},
+{term:"Sansho",tag:"Spice",def:"Greenish brown spice — tangy and lemony but NOT hot. Used in sancho salt for salmon teriyaki and beef skewers."},
+{term:"Katakuriko",tag:"Ingredient",def:"Japanese potato starch. Used for thickening and to protect food from burning while deep frying. Used in tempura batters and gyoza."},
+{term:"Tenkasu / Tenkatsu",tag:"Ingredient",def:"'Tempura flakes' — crunchy bits of deep-fried flour batter. Used for crunchiness and texture — widely used in maki rolls."},
+{term:"Panko",tag:"Ingredient",def:"Japanese-style breadcrumb. Traditionally used as a coating for deep-fried foods. Lighter and crunchier than regular breadcrumbs."},
+{section:"Premium Ingredients"},
+{term:"Wagyu",tag:"Premium",def:"Japanese cattle with extraordinary marbling. A5 is the highest grade. The fat melts at a very low temperature giving an incredibly buttery texture. Never well done — always ask temperature. Medium = al punto. Medium-rare = poco hecho."},
+{term:"Oscietra Caviar",tag:"Premium",def:"Considered a delicacy. Refers only to roe from wild sturgeon in the Caspian and Black Sea. Used in Wagyu Gunkan and both tartares. 6g portion on tuna tartare."},
+{term:"Truffle",tag:"Premium",def:"A highly prized fungus. Earthy, pungent and deliciously funky. Can be worth up to $3000 per 0.5kg. White truffles from Italy (Alba), black truffles from France (Périgord). Used in kampachi dressing and broccoli wafu sauce."},
+{term:"Tobiko (Flying Fish Roe)",tag:"Roe",def:"Natural orange flavour with mild smoky salty taste. Can be infused to change colour: wasabi = green colour, yuzu = yellow colour. Used on salmon maki and California maki."},
+{term:"Ikura (Salmon Roe)",tag:"Roe",def:"Salmon roe — larger than most fish eggs. Salty, fishy but sweet ocean flavour. When they 'pop' they release incredible flavour. Served as gunkan. Contains gluten (mixed with soy sauce)."}
+];
+
+// ============================================================
+// FISH GUIDE DATA
+// ============================================================
+const fishData = [
+{name:"Tuna — Maguro",jp:"マグロ",es:"Atún",used:"Tuna Tataki, Tuna Tartare, Spicy Tuna Maki, Chirashi Maki",flavor:"Rich, meaty, clean ocean flavour. Varies by cut — akami is lean and clean, chu toro is medium fatty, otoro is the most fatty and buttery.",texture:"Firm but tender. Melts more with higher fat content.",raw:true,cooked:false,tags:["Rich","Umami","Clean"],cuts:"Akami = lean red meat (magro). Chu Toro = medium fatty belly (medio graso). Otoro = most fatty, most expensive, most flavourful (muy graso). We use bluefin (Hon Maguro / Atún aleta azul) — the most prized."},
+{name:"Salmon — Sake",jp:"サーモン / 鮭",es:"Salmón",used:"Salmon Maki, Salmon Teriyaki, Chirashi Maki",flavor:"Oily, rich, slightly sweet, creamy. Mild to strong flavour depending on preparation. Orange flesh.",texture:"Semi soft, can be buttery when fatty.",raw:true,cooked:true,tags:["Rich","Sweet","Creamy","Oily"],note:"🐟 Sake (酒) also means rice wine in Japanese — but in the context of fish it always means salmon. No confusion needed."},
+{name:"Yellowtail — Hamachi / Kampachi",jp:"ハマチ / カンパチ",es:"Pez Limón / Seriola",used:"Kampachi Salad, Hamachi Tartare",flavor:"Hamachi: oily and creamy, slightly sweet aftertaste, high fat, light pink flesh. Kampachi (amberjack): lighter, leaner and more translucent. Best in early summer.",texture:"Dense but tender. High fat content.",raw:true,cooked:false,tags:["Creamy","Sweet","Delicate","Oily"],note:"Kampachi = pez limón / amberjack. Hamachi = yellowtail / cola amarilla. Similar but kampachi is leaner and milder. Both served raw."},
+{name:"Sweet Shrimp — Amaebi",jp:"甘エビ",es:"Gamba Dulce / Quisquilla Dulce",used:"Sashimi, Nigiri",flavor:"Naturally sweet with a delicate, clean ocean flavour. Much sweeter and more delicate than regular cooked prawns — the name 'ama' literally means sweet in Japanese. Light, almost translucent pink flesh.",texture:"Soft, silky and slightly sticky when raw. Melts in the mouth.",raw:true,cooked:false,tags:["Sweet","Delicate","Clean","Oceanic"],note:"🦐 Always served raw as sashimi or nigiri. The sweetness is natural — no sugar added. Best enjoyed with just a touch of soy sauce and wasabi. Very different from the panko prawn tempura which is cooked."},
+{name:"Black Cod — Gindara",jp:"ギンダラ",es:"Bacalao Negro / Gindara",used:"Black Cod (Gindara), Seafood Gyoza",flavor:"Extremely buttery and rich. NOT actual cod — it's sablefish. Very high fat content. Incredibly smooth, melts in the mouth. One of the finest fish on the menu.",texture:"Silky, soft, melts in the mouth. Flakes easily.",raw:false,cooked:true,tags:["Buttery","Rich","Delicate","Sweet"],note:"🔥 NOT actual cod — it's sablefish (pez mantequilla). Always describe as buttery and rich. Premium experience."},
+{name:"Seabream — Tai",jp:"タイ",es:"Dorada",used:"Seabream Tai Miso",flavor:"Very mild in fat. Firm, dense and juicy. Subtly sweet. Very light pink to dark pink flesh. Goes well with sour flavours like lime or pickled ingredients.",texture:"Firm and dense, tough flesh — sliced thinner.",raw:false,cooked:true,tags:["Delicate","Mild","Sweet"]},
+{name:"Octopus — Tako",jp:"タコ",es:"Pulpo",used:"Octopus Skewers (Robata — not sashimi/nigiri)",flavor:"Mild, slightly chewy with a subtle sweetness when cooked properly on the robata. Grilling gives it a smoky flavour and crispy exterior.",texture:"Firm but tender when cooked correctly. Can be chewy if overcooked.",raw:false,cooked:true,tags:["Mild","Smoky","Slightly Sweet"],note:"At ROKA Mallorca octopus is only served as grilled robata skewers — not as sashimi or nigiri."},
+{name:"Tobiko / Wasabi Tobiko",jp:"とびこ",es:"Huevas de Pez Volador / Tobiko",used:"Salmon Maki (wasabi tobiko), California Maki (wasabi tobiko)",flavor:"Natural orange flavour, mild smoky and salty. Wasabi tobiko = green colour, spicy kick. Pops in the mouth releasing flavour.",texture:"Small crunchy pearls that pop.",raw:true,cooked:false,tags:["Salty","Smoky","Crunchy"],note:"Wasabi tobiko (verde / green) has a spicy kick. Regular tobiko is orange and milder."},
+{name:"Oscietra Caviar",jp:"キャビア",es:"Caviar de Oscietra",used:"Wagyu Gunkan, Tuna Tartare, Hamachi Tartare",flavor:"Rich, briny, buttery with a complex oceanic flavour. Considered one of the world's greatest delicacies. From wild sturgeon in the Caspian and Black Sea.",texture:"Small firm pearls that pop elegantly.",raw:true,cooked:false,tags:["Briny","Buttery","Luxurious"]}
+];
+
+// ============================================================
+// DRINKS DATA
+// ============================================================
+const cocktailData = [
+{name:"Roka Negroni",ingredients:"Mallorcan orange dry Cabraboc gin, Campari, umeshu plum sake, sweet vermouth",tags:["bitter","citrus","floral"],pairing:"Perfect aperitivo. Goes well with edamame, kampachi, any light starter."},
+{name:"Watermelon Spritz",ingredients:"Aperol, watermelon, yuzu blend, prosecco",tags:["sweet","fresh","citrus"],pairing:"Light and refreshing. Great with sushi and light maki rolls."},
+{name:"Hiros Club",ingredients:"Tito's vodka, raspberry, pomace distillate, botanicals, plum umeshu, lemon",tags:["sweet","sour","floral","citrus"],pairing:"Versatile. Works well with seafood robata and lighter dishes."},
+{name:"Sansho Rita",ingredients:"Jimador tequila blanco, sansho agave, yellow chartreuse, citrus blend",tags:["spicy","citrus","sour"],pairing:"The sansho spice makes it bold — great with beef skewers, lamb, spicy dishes."},
+{name:"Sakura 75",ingredients:"Roku gin, cherry blossom, koji, yuzu sake, sparkling wine",tags:["floral","citrus","fresh"],pairing:"Celebratory feel. Good with tuna tataki, sushi, lighter fish."},
+{name:"Lychee Gimlet",ingredients:"Tanqueray 10 gin, lychee cordial, rosé vermouth, rose oil",tags:["floral","sweet","fresh"],pairing:"Delicate and aromatic. Perfect with kampachi salad, hamachi tartare, salmon maki."},
+{name:"Fig & Pandan Fashioned",ingredients:"Fig Japanese whisky and rum blend, pandan & kokuto syrup, bitters",tags:["rich","smoky","sweet","umami"],pairing:"Bold and complex. Great with wagyu, lamb cutlets, baby back ribs."},
+{name:"Pink Lotus (Non-Alcoholic)",ingredients:"Lychee, dragon fruit, strawberry, yuzu",tags:["sweet","floral","citrus","fresh"],pairing:"Fresh and fruity. Works with anything — great for non-drinkers with sushi."},
+{name:"Matcha Iced Tea (Non-Alcoholic)",ingredients:"Matcha, passion fruit, lemon",tags:["bitter","sour","fresh"],pairing:"Great palate cleanser. Good alongside maki rolls and lighter dishes."},
+{name:"Satsuma no Collins (Non-Alcoholic)",ingredients:"Seedlip, green shiso and mandarin cordial, soda",tags:["fresh","citrus","floral"],pairing:"Herbal and light. Perfect with salads, edamame, vegetable robata."}
+];
+
+const wineData = [
+{type:"white",style:"Light & Fresh",items:[
+{name:"Ca'n Verdura 'Supernova' Blanc 2024",origin:"Mallorca, Spain",body:2,tannin:0,acid:4,dryness:5,pairing:"Crisp and local — great with sushi, tartares, kampachi salad",glass:true},
+{name:"Ses Talaioles 'Talvin' Blanco 2024",origin:"Mallorca, Spain",body:2,tannin:0,acid:3,dryness:4,pairing:"Local Mallorcan white — works well with lighter seafood and salads",glass:false},
+{name:"Albariño Fefiñanes 2024",origin:"Rías Baixas, Spain",body:2,tannin:0,acid:4,dryness:5,pairing:"Classic pairing with seafood — octopus, gyoza, salmon teriyaki"},
+{name:"Gavi di Gavi Villa Sparina 2023",origin:"Piemonte, Italy",body:2,tannin:0,acid:4,dryness:5,pairing:"Clean and mineral — great with sushi, tartares, kampachi"},
+{name:"Chablis Louis Michel 2023",origin:"Burgundy, France",body:3,tannin:0,acid:5,dryness:5,pairing:"Steely and mineral — excellent with black cod, seabream, oysters"},
+{name:"Estate Argyros Assyrtiko 2023",origin:"Santorini, Greece",body:3,tannin:0,acid:5,dryness:5,pairing:"Volcanic minerality — black cod, seabream, seafood robata"}
+]},
+{type:"white",style:"Fruity & Aromatic",items:[
+{name:"Miguel Oliver 'Ses Ferritges' 2021",origin:"Mallorca, Spain",body:2,tannin:0,acid:3,dryness:4,pairing:"Local and aromatic — good all-rounder with salads and lighter dishes",glass:true},
+{name:"Binigrau Blanc Malvasía Riesling 2024",origin:"Mallorca, Spain",body:2,tannin:0,acid:3,dryness:3,pairing:"Off-dry and floral — works beautifully with spicy dishes, squid tempura"},
+{name:"Verdejo Natural 'Nosso' 2024",origin:"Ribera del Duero, Spain",body:2,tannin:0,acid:4,dryness:4,pairing:"Fresh and herbal — great with spinach salad, vegetable robata"},
+{name:"Sancerre Pascal Jolivet 2023",origin:"Loire, France",body:2,tannin:0,acid:5,dryness:5,pairing:"The classic sushi wine — crisp, citrusy, perfect with tartares and sashimi",glass:true},
+{name:"Cloudy Bay Sauvignon Blanc 2024",origin:"Marlborough, New Zealand",body:2,tannin:0,acid:4,dryness:4,pairing:"Tropical and fresh — versatile, good with seafood and lighter maki"}
+]},
+{type:"white",style:"Rich & Full Bodied",items:[
+{name:"Ànima Negra 'Quíbia' 2024",origin:"Mallorca, Spain",body:3,tannin:0,acid:3,dryness:4,pairing:"Local and textured — seabream, salmon teriyaki, gyoza",glass:false},
+{name:"Mâcon-la Roche-Vineuse 2022",origin:"Burgundy, France",body:3,tannin:0,acid:3,dryness:4,pairing:"Creamy Burgundy style — black cod, seabream, richer fish dishes"},
+{name:"Pouilly Fuissé Albert Bichot 2022",origin:"Burgundy, France",body:4,tannin:0,acid:3,dryness:4,pairing:"Rich Burgundy chardonnay — black cod, wagyu, baby back ribs",glass:true},
+{name:"Chablis 'Tête d'Or' Billaud-Simon 2021",origin:"Burgundy, France",body:4,tannin:0,acid:4,dryness:5,pairing:"Premium Chablis — outstanding with black cod and seabream"},
+{name:"Meursault Philippe Pacalet 2018",origin:"Burgundy, France",body:5,tannin:0,acid:3,dryness:4,pairing:"Grand Burgundy — wagyu, black cod, special occasions"}
+]},
+{type:"rose",style:"Rosé",items:[
+{name:"Talvin Rosado 2024",origin:"Mallorca, Spain",body:2,tannin:1,acid:3,dryness:4,pairing:"Local and fresh — great all-rounder, works with everything",glass:false},
+{name:"Memories de Biniagual Rosat 2024",origin:"Mallorca, Spain",body:2,tannin:1,acid:3,dryness:4,pairing:"Light local rosé — sushi, salads, lighter robata",glass:true},
+{name:"Whispering Angel Rosé 2024",origin:"Côtes du Provence, France",body:2,tannin:1,acid:3,dryness:4,pairing:"The famous Provence rosé — perfect summer wine with everything",glass:true},
+{name:"Domaine Ott 'Château de Selle' 2024",origin:"Côtes du Provence, France",body:3,tannin:1,acid:3,dryness:4,pairing:"Premium Provence rosé — lamb, chicken, seafood robata"}
+]},
+{type:"red",style:"Light Bodied Red",items:[
+{name:"Can Fumat Mantonegro 2023",origin:"Mallorca, Spain",body:2,tannin:2,acid:3,dryness:4,pairing:"Local light red — chicken wings, baby chicken, lighter meat dishes",glass:true},
+{name:"4 Kilos '12 Volts' 2021",origin:"Mallorca, Spain",body:3,tannin:2,acid:3,dryness:4,pairing:"Mallorcan red — lamb cutlets, baby chicken"},
+{name:"Fleurie Christophe Pacalet 2023",origin:"Beaujolais, France",body:2,tannin:1,acid:4,dryness:4,pairing:"Silky Beaujolais — great with lamb, chicken wings, lighter robata meat"},
+{name:"Savigny les Beaune 2020",origin:"Burgundy, France",body:3,tannin:2,acid:4,dryness:4,pairing:"Elegant Burgundy — lamb cutlets, baby chicken, beef skewers",glass:true}
+]},
+{type:"red",style:"Medium to Full Bodied Red",items:[
+{name:"Miguel Oliver 'Ses Ferritges' 2021",origin:"Mallorca, Spain",body:3,tannin:3,acid:3,dryness:4,pairing:"Local Mallorcan red — great with beef fillet, baby back ribs",glass:true},
+{name:"Borsao Garnacha 2023",origin:"Campo de Borja, Spain",body:3,tannin:2,acid:3,dryness:4,pairing:"Juicy Grenache — beef skewers, baby chicken, lamb"},
+{name:"Dalt Turó 'Granat' 2020",origin:"Mallorca, Spain",body:3,tannin:3,acid:3,dryness:4,pairing:"Bold Mallorcan — beef fillet, wagyu, baby back ribs"},
+{name:"Crozes Hermitage 'Beaumont' 2023",origin:"Rhône, France",body:4,tannin:3,acid:3,dryness:4,pairing:"Syrah spice — great with lamb cutlets, beef fillet, wagyu"},
+{name:"Can Xanet 'Sibila' Gorgollasa 2022",origin:"Mallorca, Spain",body:4,tannin:3,acid:3,dryness:5,pairing:"Premium Mallorcan — wagyu, beef fillet, baby back ribs"},
+{name:"Rioja Finca Martelo 2019",origin:"Rioja, Spain",body:4,tannin:4,acid:3,dryness:4,pairing:"Classic Rioja — beef fillet, lamb, wagyu",glass:true}
+]},
+{type:"sparkling",style:"Champagne & Sparkling",items:[
+{name:"Mestres 'Coquet' Cava 2020",origin:"Catalunya, Spain",body:2,tannin:0,acid:4,dryness:5,pairing:"Great value aperitivo cava — sushi, tartares, lighter starters",glass:true},
+{name:"Billecart-Salmon Brut Réserve NV",origin:"Champagne, France",body:3,tannin:0,acid:4,dryness:5,pairing:"Classic champagne — perfect aperitivo, wagyu gunkan, tuna tartare",glass:true},
+{name:"Bollinger 'Special Cuvée' NV",origin:"Champagne, France",body:3,tannin:0,acid:4,dryness:5,pairing:"Rich champagne house style — wagyu, black cod, celebrations"},
+{name:"Billecart-Salmon Brut Rosé NV",origin:"Champagne, France",body:3,tannin:1,acid:4,dryness:5,pairing:"Rosé champagne — works beautifully with the whole menu, very versatile",glass:true},
+{name:"Dom Pérignon 2013",origin:"Champagne, France",body:4,tannin:0,acid:4,dryness:5,pairing:"The ultimate celebration bottle — for special occasions and high-spend tables"}
+]},
+{type:"sake",style:"Light & Dry Sake (Honjozo / Ginjo)",items:[
+{name:"Tosatsuru 'Azure' ROKA Edition, Ginjo",origin:"Kochi, Japan",body:2,tannin:0,acid:3,dryness:4,pairing:"Our own ROKA edition — light and clean, great with sushi, tartares and lighter dishes",glass:true},
+{name:"Mugen 'Infinite' Junmai",origin:"Kanagawa, Japan",body:3,tannin:0,acid:3,dryness:4,pairing:"Well-balanced — versatile with sushi, salads and seafood robata",glass:true}
+]},
+{type:"sake",style:"Rich & Complex Sake (Junmai Ginjo)",items:[
+{name:"Dewazakura 'Dewasansan' Junmai Ginjo",origin:"Yamagata, Japan",body:3,tannin:0,acid:3,dryness:4,pairing:"Floral and fruity — great with kampachi, tuna tartare, seafood"},
+{name:"Heavensake Junmai Ginjo",origin:"Miyagi, Japan",body:3,tannin:0,acid:3,dryness:3,pairing:"Smooth and approachable — good all-rounder for food pairing",glass:true},
+{name:"Dassai '39%' Junmai Daiginjo",origin:"Yamaguchi, Japan",body:4,tannin:0,acid:3,dryness:3,pairing:"Premium daiginjo — exceptionally clean, great with wagyu gunkan and caviar dishes",glass:true}
+]},
+{type:"sake",style:"Sweet & Specialty Sake",items:[
+{name:"Yuzu Sake, Iinuma Honke",origin:"Chiba, Japan",body:2,tannin:0,acid:4,dryness:2,pairing:"Bright and citrusy — great as aperitivo or with desserts. Say KANPAI when dropping!",glass:true},
+{name:"Ume Shu (Plum Sake), Urakasumi",origin:"Miyagi, Japan",body:3,tannin:0,acid:3,dryness:1,pairing:"Sweet plum — digestif, or with desserts. Also used in Roka Negroni.",glass:true},
+{name:"Rihaku 'Dreamy Clouds' Nigori",origin:"Shimane, Japan",body:4,tannin:0,acid:2,dryness:2,pairing:"Cloudy, rich and slightly sweet — great with spicier dishes to balance heat. Wagyu, lamb."}
+]}
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let activeTab = 'food';
+let activeSection = 'starters';
+
+// ============================================================
+// HELPERS
+// ============================================================
+function bar(val,max,filled,empty){
+  const f=Math.round((val/max)*5);
+  return filled.repeat(f)+empty.repeat(5-f);
+}
+function wineBar(body,tannin,acid,dryness,type){
+  const b='▓',e='░';
+  let html='';
+  if(type==='sake'){
+    html+=`<div class="wine-bar"><span class="wine-bar-label">Body</span><span class="wine-bar-track">${bar(body,5,b,e)}</span></div>`;
+    html+=`<div class="wine-bar"><span class="wine-bar-label">Dryness</span><span class="wine-bar-track">${bar(dryness,5,b,e)}</span></div>`;
+    html+=`<div class="wine-bar"><span class="wine-bar-label">Acidity</span><span class="wine-bar-track">${bar(acid,5,b,e)}</span></div>`;
+  } else if(type==='white'||type==='sparkling'){
+    html+=`<div class="wine-bar"><span class="wine-bar-label">Body</span><span class="wine-bar-track">${bar(body,5,b,e)}</span></div>`;
+    html+=`<div class="wine-bar"><span class="wine-bar-label">Acidity</span><span class="wine-bar-track">${bar(acid,5,b,e)}</span></div>`;
+    html+=`<div class="wine-bar"><span class="wine-bar-label">Dryness</span><span class="wine-bar-track">${bar(dryness,5,b,e)}</span></div>`;
+  } else {
+    html+=`<div class="wine-bar"><span class="wine-bar-label">Body</span><span class="wine-bar-track">${bar(body,5,b,e)}</span></div>`;
+    html+=`<div class="wine-bar"><span class="wine-bar-label">Tannins</span><span class="wine-bar-track">${bar(tannin,5,b,e)}</span></div>`;
+    html+=`<div class="wine-bar"><span class="wine-bar-label">Acidity</span><span class="wine-bar-track">${bar(acid,5,b,e)}</span></div>`;
+  }
+  return html;
+}
+
+// ============================================================
+// RENDER FOOD
+// ============================================================
+function buildNav(){
+  const nav=document.getElementById("top-nav");
+  nav.innerHTML='';
+  if(activeTab!=='food'){nav.style.display='none';return;}
+  nav.style.display='flex';
+  sections.forEach(s=>{
+    const btn=document.createElement("button");
+    btn.className="nav-btn"+(s.id===activeSection?" active":"");
+    btn.textContent=s.label;
+    btn.style.background=s.id===activeSection?s.color:"#EEE";
+    btn.style.color=s.id===activeSection?"#fff":"#444";
+    btn.onclick=()=>{activeSection=s.id;buildNav();renderFood();};
+    nav.appendChild(btn);
+  });
+}
+
+function makeCard(d){
+  const card=document.createElement("div");
+  card.className="card";
+  const header=document.createElement("button");
+  header.className="card-header";
+  header.innerHTML=`<div style="flex:1"><div class="dish-name">${d.name}</div><div class="dish-name-es">${d.nameEs}</div>${d.tempNote?`<div class="temp-note">${d.tempNote}</div>`:""}</div><span class="chevron">▼</span>`;
+  const body=document.createElement("div");
+  body.className="card-body";
+  let html="";
+  if(d.fishNote) html+=`<div class="fish-note">${d.fishNote}</div>`;
+  html+=`<div class="label">Say to guests</div><div class="announce">${d.announce}</div>`;
+  html+=`<div class="label">Full description</div><div class="announce-full">${d.announceFull}</div>`;
+  html+=`<div class="announce-es">${d.announceEs}</div>`;
+  html+=`<div class="label">Key Ingredients</div><div class="key">${d.key}</div>`;
+  html+=`<div class="label">Allergens</div><div class="badges">${d.allergens.split(", ").map(a=>`<span class="badge-a">${a}</span>`).join("")}</div>`;
+  if(d.diet) html+=`<div style="margin-top:8px"><span class="badge-d">${d.diet}</span></div>`;
+  html+=`<div class="section-tag">Section: ${d.section}</div>`;
+  body.innerHTML=html;
+  header.onclick=()=>{const o=body.classList.toggle("open");header.querySelector(".chevron").textContent=o?"▲":"▼";};
+  card.appendChild(header);card.appendChild(body);return card;
+}
+
+function renderFood(){
+  const sec=sections.find(s=>s.id===activeSection);
+  const content=document.getElementById("content");
+  content.innerHTML=`<div class="section-title" style="color:${sec.color}">${sec.label}</div><div class="section-subtitle">${sec.labelEs}</div>`;
+  sec.dishes.forEach(d=>content.appendChild(makeCard(d)));
+}
+
+// ============================================================
+// RENDER GLOSSARY
+// ============================================================
+function renderGlossary(){
+  document.getElementById("top-nav").style.display="none";
+  const content=document.getElementById("content");
+  content.innerHTML='';
+  glossaryData.forEach(item=>{
+    if(item.section){
+      const t=document.createElement("div");
+      t.className="gloss-section-title";t.textContent=item.section;
+      content.appendChild(t);return;
+    }
+    const card=document.createElement("div");card.className="gloss-card";
+    const header=document.createElement("button");header.className="gloss-header";
+    header.innerHTML=`<div><span class="gloss-term">${item.term}</span><span class="gloss-tag">${item.tag}</span></div><span class="chevron">▼</span>`;
+    const body=document.createElement("div");body.className="gloss-body";
+    body.textContent=item.def;
+    header.onclick=()=>{const o=body.classList.toggle("open");header.querySelector(".chevron").textContent=o?"▲":"▼";};
+    card.appendChild(header);card.appendChild(body);content.appendChild(card);
+  });
+}
+
+// ============================================================
+// RENDER FISH
+// ============================================================
+function renderFish(){
+  document.getElementById("top-nav").style.display="none";
+  const content=document.getElementById("content");
+  content.innerHTML='<div class="section-title" style="color:#1A6B8A">Fish Guide</div><div class="section-subtitle" style="margin-bottom:14px">Tap each fish to learn more</div>';
+  fishData.forEach(f=>{
+    const card=document.createElement("div");card.className="fish-card";
+    const header=document.createElement("button");header.className="fish-header";
+    header.innerHTML=`<div><div class="fish-name">${f.name}</div><div class="fish-jp">${f.jp} — <span style="color:#2E86C1;font-style:italic">${f.es}</span></div><div class="fish-jp">Used in: ${f.used}</div></div><span class="chevron">▼</span>`;
+    const body=document.createElement("div");body.className="fish-body";
+    let html=`<div class="label">Flavour</div><div>${f.flavor}</div>`;
+    html+=`<div class="label">Texture</div><div>${f.texture}</div>`;
+    html+=`<div class="label">Served</div><div>${f.raw&&f.cooked?"Raw & Cooked":f.raw?"Raw only":"Cooked only"}</div>`;
+    if(f.cuts) html+=`<div class="label">Cuts / Notes</div><div>${f.cuts}</div>`;
+    if(f.note) html+=`<div class="fish-note" style="margin-top:8px">${f.note}</div>`;
+    html+=`<div class="fish-profile">${f.tags.map(t=>`<span class="fish-tag">${t}</span>`).join("")}</div>`;
+    body.innerHTML=html;
+    header.onclick=()=>{const o=body.classList.toggle("open");header.querySelector(".chevron").textContent=o?"▲":"▼";};
+    card.appendChild(header);card.appendChild(body);content.appendChild(card);
+  });
+}
+
+// ============================================================
+// RENDER DRINKS
+// ============================================================
+function renderDrinks(){
+  document.getElementById("top-nav").style.display="none";
+  const content=document.getElementById("content");
+  content.innerHTML='';
+
+  // Cocktails
+  const ct=document.createElement("div");ct.className="drink-section-title";ct.textContent="🍹 Cocktails";content.appendChild(ct);
+  cocktailData.forEach(c=>{
+    const card=document.createElement("div");card.className="drink-card";
+    const header=document.createElement("button");header.className="drink-header";
+    header.innerHTML=`<div style="flex:1"><div class="drink-name">${c.name}</div><div class="cocktail-ingredients">${c.ingredients}</div></div><span class="chevron">▼</span>`;
+    const body=document.createElement("div");body.className="drink-body";
+    let html=`<div class="label">Flavour Profile</div><div class="flavor-tags">${c.tags.map(t=>`<span class="ftag ${t}">${t.charAt(0).toUpperCase()+t.slice(1)}</span>`).join("")}</div>`;
+    html+=`<div class="pairing">🍱 ${c.pairing}</div>`;
+    body.innerHTML=html;
+    header.onclick=()=>{const o=body.classList.toggle("open");header.querySelector(".chevron").textContent=o?"▲":"▼";};
+    card.appendChild(header);card.appendChild(body);content.appendChild(card);
+  });
+
+  // Wine & Sake
+  const wt=document.createElement("div");wt.className="drink-section-title";wt.textContent="🍷 Wine & 🍶 Sake";content.appendChild(wt);
+  const byGlass=document.createElement("div");byGlass.innerHTML=`<div style="background:#FFF8EC;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px;color:#5A3E00"><strong>🥂 By Glass</strong> — items marked with <strong>★</strong> are available by the glass. Ordered cheapest → most expensive within each style.</div>`;
+  content.appendChild(byGlass);
+
+  wineData.forEach(group=>{
+    const gt=document.createElement("div");
+    gt.style.cssText="font-size:14px;font-weight:700;color:#888;margin:14px 0 6px;text-transform:uppercase;letter-spacing:0.5px;";
+    gt.textContent=group.style;
+    content.appendChild(gt);
+    group.items.forEach(w=>{
+      const card=document.createElement("div");card.className="drink-card";
+      const header=document.createElement("button");header.className="drink-header";
+      const glassTag=w.glass?'<span style="color:#C8A96E;font-weight:700;margin-left:6px">★ By glass</span>':'';
+      header.innerHTML=`<div style="flex:1"><div class="drink-name">${w.name}${glassTag}</div><div style="font-size:12px;color:#888;margin-top:2px">${w.origin}</div></div><span class="chevron">▼</span>`;
+      const body=document.createElement("div");body.className="drink-body";
+      let html=`<div class="label">Profile</div>${wineBar(w.body,w.tannin,w.acid,w.dryness,group.type)}`;
+      html+=`<div class="pairing">🍱 ${w.pairing}</div>`;
+      body.innerHTML=html;
+      header.onclick=()=>{const o=body.classList.toggle("open");header.querySelector(".chevron").textContent=o?"▲":"▼";};
+      card.appendChild(header);card.appendChild(body);content.appendChild(card);
+    });
+  });
+}
+
+// ============================================================
+// SEARCH
+// ============================================================
+function doSearch(val){
+  const nav=document.getElementById("top-nav");
+  const content=document.getElementById("content");
+  if(!val||val.trim().length<2){
+    nav.style.display=activeTab==='food'?'flex':'none';
+    if(activeTab==='food'){buildNav();renderFood();}
+    else if(activeTab==='fish'){renderFish();}
+    else if(activeTab==='glossary'){renderGlossary();}
+    else if(activeTab==='drinks'){renderDrinks();}
+    else if(activeTab==='allergy'){renderAllergy();}
+    return;
+  }
+  nav.style.display="none";
+  const q=val.toLowerCase();
+  const results=sections.flatMap(s=>s.dishes).filter(d=>
+    [d.name,d.nameEs,d.allergens,d.announce,d.announceFull,d.announceEs,d.key].some(f=>f&&f.toLowerCase().includes(q))
+  );
+  content.innerHTML=`<div id="search-count">${results.length} result(s) for "<strong>${val}</strong>"</div>`;
+  if(results.length===0){
+    content.innerHTML+=`<div style="padding:20px;text-align:center;color:#888">No dishes found. Try searching by ingredient or allergen.</div>`;
+  }
+  results.forEach(d=>content.appendChild(makeCard(d)));
+}
+
+// ============================================================
+// ALLERGY FILTER
+// ============================================================
+const ALL_ALLERGENS = [
+  "Celery","Chili","Crustaceans","Dairy","Egg","Fish",
+  "Garlic","Gluten","Molluscs","Msg","Mustard","Nuts",
+  "Onion","Sesame","Soya","Alcohol"
+];
+
+let selectedAllergens = new Set();
+
+function renderAllergy(){
+  document.getElementById("top-nav").style.display="none";
+  const content=document.getElementById("content");
+  content.innerHTML='';
+
+  // Warning banner
+  const warn=document.createElement("div");
+  warn.style.cssText="background:#FFF3CD;border:1px solid #F0C040;border-radius:8px;padding:10px 12px;margin-bottom:14px;font-size:12px;color:#7A4F00;line-height:1.5";
+  warn.innerHTML="⚠️ <strong>Staff guide only.</strong> Always confirm with the kitchen before serving a guest with allergies. This tool does not account for cross-contamination or modifications.";
+  content.appendChild(warn);
+
+  // Title
+  const title=document.createElement("div");
+  title.style.cssText="font-size:18px;font-weight:800;color:#1A1A1A;margin-bottom:4px";
+  title.textContent="Allergy Filter";
+  content.appendChild(title);
+  const sub=document.createElement("div");
+  sub.style.cssText="font-size:13px;color:#888;margin-bottom:14px";
+  sub.textContent="Select common allergens or search any ingredient";
+  content.appendChild(sub);
+
+  // Ingredient search bar
+  const searchWrap=document.createElement("div");
+  searchWrap.style.cssText="margin-bottom:14px";
+  const searchLabel=document.createElement("div");
+  searchLabel.style.cssText="font-size:11px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px";
+  searchLabel.textContent="Search any ingredient";
+  const ingredientInput=document.createElement("input");
+  ingredientInput.type="text";
+  ingredientInput.placeholder="e.g. garlic, ginger, yuzu, lime...";
+  ingredientInput.value=window._ingredientSearch||'';
+  ingredientInput.autocomplete="off";
+  ingredientInput.autocorrect="off";
+  ingredientInput.autocapitalize="off";
+  ingredientInput.spellcheck=false;
+  ingredientInput.style.cssText="width:100%;padding:10px 14px;border-radius:8px;border:2px solid #E0DDD8;font-size:16px;background:#FFF;color:#1A1A1A;outline:none;-webkit-appearance:none";
+  ingredientInput.addEventListener('focus',()=>{ingredientInput.style.borderColor='#C0392B';});
+  ingredientInput.addEventListener('blur',()=>{ingredientInput.style.borderColor='#E0DDD8';});
+  ingredientInput.addEventListener('input',()=>{
+    window._ingredientSearch=ingredientInput.value;
+    renderAllergyResults(content, allergenButtonsDiv);
+  });
+  searchWrap.appendChild(searchLabel);
+  searchWrap.appendChild(ingredientInput);
+  content.appendChild(searchWrap);
+
+  // Allergen buttons
+  const allergenLabel=document.createElement("div");
+  allergenLabel.style.cssText="font-size:11px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px";
+  allergenLabel.textContent="Common allergens";
+  content.appendChild(allergenLabel);
+
+  const allergenButtonsDiv=document.createElement("div");
+  allergenButtonsDiv.style.cssText="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px";
+  ALL_ALLERGENS.forEach(a=>{
+    const btn=document.createElement("button");
+    const active=selectedAllergens.has(a);
+    btn.style.cssText=`padding:8px 14px;border-radius:20px;border:2px solid ${active?'#C0392B':'#E0DDD8'};background:${active?'#C0392B':'#FFF'};color:${active?'#FFF':'#444'};font-size:13px;font-weight:700;cursor:pointer;transition:all .15s`;
+    btn.textContent=(active?'✕ ':'')+a;
+    btn.onclick=()=>{
+      if(selectedAllergens.has(a)) selectedAllergens.delete(a);
+      else selectedAllergens.add(a);
+      renderAllergyResults(content, allergenButtonsDiv);
+      // Rebuild buttons
+      allergenButtonsDiv.innerHTML='';
+      ALL_ALLERGENS.forEach(al=>{
+        const b=document.createElement("button");
+        const act=selectedAllergens.has(al);
+        b.style.cssText=`padding:8px 14px;border-radius:20px;border:2px solid ${act?'#C0392B':'#E0DDD8'};background:${act?'#C0392B':'#FFF'};color:${act?'#FFF':'#444'};font-size:13px;font-weight:700;cursor:pointer`;
+        b.textContent=(act?'✕ ':'')+al;
+        b.onclick=btn.onclick.bind(null);
+        b.onclick=()=>{
+          if(selectedAllergens.has(al)) selectedAllergens.delete(al);
+          else selectedAllergens.add(al);
+          renderAllergy();
+        };
+        allergenButtonsDiv.appendChild(b);
+      });
+    };
+    allergenButtonsDiv.appendChild(btn);
+  });
+  content.appendChild(allergenButtonsDiv);
+
+  // Clear button
+  const clearWrap=document.createElement("div");
+  clearWrap.style.cssText="margin-bottom:16px";
+  if(selectedAllergens.size>0||(window._ingredientSearch&&window._ingredientSearch.trim().length>0)){
+    const clear=document.createElement("button");
+    clear.style.cssText="padding:8px 16px;border-radius:20px;border:2px solid #888;background:none;color:#888;font-size:13px;font-weight:700;cursor:pointer";
+    clear.textContent="Clear all";
+    clear.onclick=()=>{selectedAllergens.clear();window._ingredientSearch='';renderAllergy();};
+    clearWrap.appendChild(clear);
+  }
+  content.appendChild(clearWrap);
+
+  // Results placeholder
+  const resultsDiv=document.createElement("div");
+  resultsDiv.id="allergy-results";
+  content.appendChild(resultsDiv);
+
+  renderAllergyResults(content, allergenButtonsDiv);
+}
+
+function renderAllergyResults(content){
+  // Remove old results
+  const old=document.getElementById("allergy-results");
+  if(old) old.remove();
+  const resultsDiv=document.createElement("div");
+  resultsDiv.id="allergy-results";
+  content.appendChild(resultsDiv);
+
+  const ingredientQuery=(window._ingredientSearch||'').trim().toLowerCase();
+  const hasAllergens=selectedAllergens.size>0;
+  const hasIngredient=ingredientQuery.length>1;
+
+  if(!hasAllergens&&!hasIngredient){
+    resultsDiv.innerHTML=`<div style="text-align:center;padding:30px 20px;color:#AAA;font-size:14px">👆 Select an allergen above or search an ingredient<br>to see what the guest can eat</div>`;
+    return;
+  }
+
+  // Filter dishes
+  const safe=[];
+  const flagged=[];
+
+  sections.forEach(s=>{
+    s.dishes.forEach(d=>{
+      const allergenStr=(d.allergens||'').toLowerCase();
+      const keyStr=(d.key||'').toLowerCase();
+      const combined=allergenStr+' '+keyStr;
+
+      // Check allergen buttons
+      const allergenConflict=hasAllergens&&Array.from(selectedAllergens).some(sel=>
+        allergenStr.includes(sel.toLowerCase())
+      );
+
+      // Check ingredient search
+      const ingredientConflict=hasIngredient&&combined.includes(ingredientQuery);
+
+      const conflict=allergenConflict||ingredientConflict;
+
+      if(!conflict) safe.push({dish:d,section:s.label,sectionColor:s.color});
+      else flagged.push({dish:d,section:s.label,sectionColor:s.color,reason:
+        allergenConflict?`Contains: ${Array.from(selectedAllergens).filter(sel=>allergenStr.includes(sel.toLowerCase())).join(', ')}`:
+        `Ingredient found: "${ingredientQuery}"`
+      });
+    });
+  });
+
+  // Active filters summary
+  let filterSummary='';
+  if(hasAllergens) filterSummary+=Array.from(selectedAllergens).join(', ');
+  if(hasIngredient) filterSummary+=(filterSummary?' + ':'')+`"${ingredientQuery}"`;
+
+  // Safe dishes
+  const safeTitle=document.createElement("div");
+  safeTitle.style.cssText="background:#D4EDDA;border:1px solid #5CB85C;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px;color:#155724;font-weight:600";
+  safeTitle.innerHTML=`✅ <strong>${safe.length} dishes safe</strong> — no ${filterSummary} found`;
+  resultsDiv.appendChild(safeTitle);
+
+  if(safe.length===0){
+    const none=document.createElement("div");
+    none.style.cssText="text-align:center;padding:20px;color:#C0392B;font-size:14px;font-weight:600";
+    none.textContent="⚠️ No safe dishes found — speak with the kitchen directly.";
+    resultsDiv.appendChild(none);
+  } else {
+    // Group by section
+    const grouped={};
+    safe.forEach(({dish,section,sectionColor})=>{
+      if(!grouped[section]) grouped[section]={dishes:[],color:sectionColor};
+      grouped[section].dishes.push(dish);
+    });
+    Object.entries(grouped).forEach(([sectionName,{dishes,color}])=>{
+      const secTitle=document.createElement("div");
+      secTitle.style.cssText=`font-weight:800;font-size:14px;color:${color||'#444'};margin:12px 0 6px;padding-bottom:4px;border-bottom:2px solid ${color||'#EEE'}`;
+      secTitle.textContent=`${sectionName} (${dishes.length})`;
+      resultsDiv.appendChild(secTitle);
+      dishes.forEach(d=>{
+        const card=document.createElement("div");
+        card.style.cssText="background:#FAFAF8;border:1px solid #C3E6CB;border-radius:8px;margin-bottom:8px;padding:12px 14px";
+        card.innerHTML=`<div style="font-weight:700;font-size:14px;color:#1A1A1A">${d.name}</div>
+          <div style="font-size:13px;color:#2E86C1;font-style:italic;margin-top:2px">${d.announce}</div>
+          <div style="font-size:12px;color:#888;margin-top:3px">${d.announceEs}</div>
+          ${d.diet?`<span style="display:inline-block;background:#D4EDDA;color:#155724;border:1px solid #5CB85C;border-radius:4px;padding:1px 7px;font-size:11px;font-weight:600;margin-top:4px">${d.diet}</span>`:''}`;
+        resultsDiv.appendChild(card);
+      });
+    });
+  }
+
+  // Flagged dishes (contains allergen)
+  if(flagged.length>0){
+    const flagTitle=document.createElement("div");
+    flagTitle.style.cssText="background:#FFEBEE;border:1px solid #EF9A9A;border-radius:8px;padding:10px 12px;margin:16px 0 10px;font-size:13px;color:#B71C1C;font-weight:600";
+    flagTitle.innerHTML=`❌ <strong>${flagged.length} dishes to avoid</strong>`;
+    resultsDiv.appendChild(flagTitle);
+    const flaggedGroup={};
+    flagged.forEach(({dish,section,sectionColor,reason})=>{
+      if(!flaggedGroup[section]) flaggedGroup[section]={dishes:[],color:sectionColor};
+      flaggedGroup[section].dishes.push({dish,reason});
+    });
+    Object.entries(flaggedGroup).forEach(([sectionName,{dishes,color}])=>{
+      const secTitle=document.createElement("div");
+      secTitle.style.cssText=`font-weight:800;font-size:14px;color:#888;margin:10px 0 5px`;
+      secTitle.textContent=sectionName;
+      resultsDiv.appendChild(secTitle);
+      dishes.forEach(({dish,reason})=>{
+        const card=document.createElement("div");
+        card.style.cssText="background:#FFF8F8;border:1px solid #FFCDD2;border-radius:8px;margin-bottom:6px;padding:10px 12px";
+        card.innerHTML=`<div style="font-weight:700;font-size:13px;color:#888">${dish.name}</div>
+          <div style="font-size:11px;color:#C0392B;font-weight:600;margin-top:2px">${reason}</div>`;
+        resultsDiv.appendChild(card);
+      });
+    });
+  }
+}
+
+// ============================================================
+// TAB SWITCHING
+// ============================================================
+function switchTab(tab){
+  activeTab=tab;
+  document.querySelectorAll('.bottom-btn').forEach(b=>b.classList.remove('active'));
+  const idx={food:0,fish:1,glossary:2,drinks:3,allergy:4}[tab];
+  document.querySelectorAll('.bottom-btn')[idx].classList.add('active');
+  document.getElementById('search').value='';
+  if(tab==='food'){buildNav();renderFood();}
+  else if(tab==='fish'){renderFish();}
+  else if(tab==='glossary'){renderGlossary();}
+  else if(tab==='drinks'){renderDrinks();}
+  else if(tab==='allergy'){renderAllergy();}
+}
+
+// INIT
+switchTab('food');
+</script>
+</body>
+</html>
